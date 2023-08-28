@@ -130,41 +130,41 @@ def load_model(device_type, model_id, model_basename=None):
 
 
 # chose device typ to run on as well as to show source documents.
-@click.command()
-@click.option(
-    "--device_type",
-    default="cuda" if torch.cuda.is_available() else "cpu",
-    type=click.Choice(
-        [
-            "cpu",
-            "cuda",
-            "ipu",
-            "xpu",
-            "mkldnn",
-            "opengl",
-            "opencl",
-            "ideep",
-            "hip",
-            "ve",
-            "fpga",
-            "ort",
-            "xla",
-            "lazy",
-            "vulkan",
-            "mps",
-            "meta",
-            "hpu",
-            "mtia",
-        ],
-    ),
-    help="Device to run on. (Default is cuda)",
-)
-@click.option(
-    "--show_sources",
-    "-s",
-    is_flag=True,
-    help="Show sources along with answers (Default is False)",
-)
+# @click.command()
+# @click.option(
+#     "--device_type",
+#     default="cuda" if torch.cuda.is_available() else "cpu",
+#     type=click.Choice(
+#         [
+#             "cpu",
+#             "cuda",
+#             "ipu",
+#             "xpu",
+#             "mkldnn",
+#             "opengl",
+#             "opencl",
+#             "ideep",
+#             "hip",
+#             "ve",
+#             "fpga",
+#             "ort",
+#             "xla",
+#             "lazy",
+#             "vulkan",
+#             "mps",
+#             "meta",
+#             "hpu",
+#             "mtia",
+#         ],
+#     ),
+#     help="Device to run on. (Default is cuda)",
+# )
+# @click.option(
+#     "--show_sources",
+#     "-s",
+#     is_flag=True,
+#     help="Show sources along with answers (Default is False)",
+# )
 def main(device_type, show_sources):
     """
     This function implements the information retrieval task.
@@ -216,27 +216,33 @@ def main(device_type, show_sources):
         chain_type_kwargs={"prompt": prompt, "memory": memory},
     )
     # Interactive questions and answers
-    while True:
-        query = input("\nEnter a query: ")
-        if query == "exit":
-            break
-        # Get the answer from the chain
-        res = qa(query)
-        answer, docs = res["result"], res["source_documents"]
 
-        # Print the result
-        print("\n\n> Question:")
-        print(query)
-        print("\n> Answer:")
-        print(answer)
+    query = "what to do when a new incident occurs ?"
+    res = qa(query)
+    answer, docs = res["result"], res["source_documents"]
+    print("\n> Answer:")
+    print(answer)
+    # while True:
+    #     query = input("\nEnter a query: ")
+    #     if query == "exit":
+    #         break
+    #     # Get the answer from the chain
+    #     res = qa(query)
+    #     answer, docs = res["result"], res["source_documents"]
 
-        if show_sources:  # this is a flag that you can set to disable showing answers.
-            # # Print the relevant sources used for the answer
-            print("----------------------------------SOURCE DOCUMENTS---------------------------")
-            for document in docs:
-                print("\n> " + document.metadata["source"] + ":")
-                print(document.page_content)
-            print("----------------------------------SOURCE DOCUMENTS---------------------------")
+    #     # Print the result
+    #     print("\n\n> Question:")
+    #     print(query)
+    #     print("\n> Answer:")
+    #     print(answer)
+
+    #     if show_sources:  # this is a flag that you can set to disable showing answers.
+    #         # # Print the relevant sources used for the answer
+    #         print("----------------------------------SOURCE DOCUMENTS---------------------------")
+    #         for document in docs:
+    #             print("\n> " + document.metadata["source"] + ":")
+    #             print(document.page_content)
+    #         print("----------------------------------SOURCE DOCUMENTS---------------------------")
 
 
 if __name__ == "__main__":
