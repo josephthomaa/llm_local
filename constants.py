@@ -52,8 +52,8 @@ EMBEDDING_MODEL_NAME = "hkunlp/instructor-large"
 ####    32b        130 GB       65 GB       32.5 GB      16.25 GB 
 ####    65b        260.8 GB     130.4 GB    65.2 GB      32.6 GB  
 
-MODEL_ID = "TheBloke/Llama-2-7B-Chat-GGML"
-MODEL_BASENAME = "llama-2-7b-chat.ggmlv3.q4_0.bin"
+MODEL_ID = "daryl149/llama-2-7b-chat-hf"
+MODEL_BASENAME = None
 
 # for HF models
 # MODEL_ID = "TheBloke/vicuna-7B-1.1-HF"
