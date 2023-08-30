@@ -165,7 +165,7 @@ def load_model(device_type, model_id, model_basename=None):
 #     is_flag=True,
 #     help="Show sources along with answers (Default is False)",
 # )
-def main(device_type, show_sources):
+def main(device_type="cuda", show_sources=False):
     """
     This function implements the information retrieval task.
 
